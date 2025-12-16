@@ -8,8 +8,6 @@ import "highlight.js/styles/github-dark.css";
 import axios from "axios";
 import "./App.css";
 
-
-
 function App() {
   const [code, setCode] = useState(`function sum(){
     return 1+1
@@ -24,16 +22,16 @@ function App() {
   }, []);
 
   async function reviewCode() {
-
     if (!code.trim()) {
-    setReview("Please enter some code before reviewing.");
-    return; 
-  }
+      setReview("Please enter some code before reviewing.");
+      return;
+    }
 
     setLoading(true);
-    const response = await axios.post("https://ai-code-review-backend-three.vercel.app/ai/get-review", {
-      code,
-    });
+    const response = await axios.post(
+      "https://ai-code-review-backend-three.vercel.app/ai/get-review",
+      { code }
+    );
 
     setReview(response.data);
     setLoading(false);
@@ -79,4 +77,3 @@ function App() {
 }
 
 export default App;
-
